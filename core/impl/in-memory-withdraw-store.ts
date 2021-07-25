@@ -1,5 +1,5 @@
 import {ResourceToken, URI} from "../contracts";
-import {IWithdrawStore} from "../contracts/withdraw-manager";
+import {IWithdrawStore} from "../contracts/withdraw-store";
 
 export class InMemoryWithdrawStore implements IWithdrawStore {
 

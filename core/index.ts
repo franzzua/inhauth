@@ -1,9 +1,8 @@
 import {Issuer} from "./impl/issuer";
 import {InMemoryWithdrawStore} from "./impl/in-memory-withdraw-store";
 import {Authenticator} from "./impl/authenticator";
-import {RuleStoreMock} from "./test/mocks/rule-store.mock";
 import {Validator} from "./impl/validator";
-import {IAuthenticator, IIssuer, IRuleStore, IWithdrawStore} from "./contracts";
+import {AccessInheritanceRule, IAuthenticator, IIssuer, IRuleStore, IWithdrawStore, URI} from "./contracts";
 
 export * from "./contracts";
 export {Issuer} from "./impl/issuer"
@@ -24,5 +23,11 @@ export class AuthManager{
         new Validator(this.withdrawer),
         this.issuer
     );
+
+    public async updateRules(resource: URI, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]){
+        await this.ruleStore.UpdateRules(resource, add, remove);
+        if (remove.length > 0)
+            this.withdrawer.WithdrawAllTokens(resource);
+    }
 
 }

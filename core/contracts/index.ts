@@ -1,6 +1,6 @@
 export {IAuthenticator} from "./authenticator";
 export {IIssuer} from "./issuer";
-export {IWithdrawStore} from "./withdraw-manager";
+export {IWithdrawStore} from "./withdraw-store";
 export {IValidator} from "./validator";
 
 export type URI = string;
@@ -35,4 +35,5 @@ export enum AccessMode {
 
 export interface IRuleStore {
     GetRules(resource: URI): Promise<AccessInheritanceRule[]>;
+    UpdateRules(resource: URI, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]): Promise<void>;
 }

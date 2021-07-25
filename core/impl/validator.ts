@@ -1,6 +1,6 @@
 import {ResourceToken} from "../contracts";
 import {IValidator} from "../contracts/validator";
-import {IWithdrawStore} from "../contracts/withdraw-manager";
+import {IWithdrawStore} from "../contracts/withdraw-store";
 
 export class Validator implements IValidator {
 
