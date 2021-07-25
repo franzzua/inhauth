@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "declarationDir": "./dist/typings",
+    "outDir": "./dist"
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
