@@ -1,4 +1,4 @@
-import {AccessMode, InheritedAccess, ResourceToken, URI} from "../contracts";
+import {AccessMode, InheritedAccess, ResourceToken} from "../contracts";
 import {IIssuer} from "../contracts/issuer";
 
 const day = 1000*3600*24;
@@ -6,7 +6,7 @@ const day = 1000*3600*24;
 export class Issuer implements IIssuer {
     private expiration: number = day;
 
-    public async Issue(resource: URI, access: InheritedAccess | AccessMode): Promise<ResourceToken> {
+    public async Issue(resource: string, access: InheritedAccess | AccessMode): Promise<ResourceToken> {
         const now = new Date();
         const expires = new Date(+now + this.expiration);
         const token = {

@@ -1,4 +1,4 @@
-# Hierarchy Inherited Authorization
+# Inherited Authorization
 Наследуемая авторизация иерархических структур
 
 ## About Problem

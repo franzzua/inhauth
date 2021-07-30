@@ -1,7 +1,5 @@
-import {URI} from "./index";
+export abstract class WithdrawStore {
+    abstract WithdrawAllTokens(resource: string): Promise<void>;
 
-export interface IWithdrawStore {
-    WithdrawAllTokens(resource: URI): Promise<void>;
-
-    CheckIfWithdrawed(resource: URI, since?: Date): Promise<boolean>;
+    abstract CheckIfWithdrawed(resource: string, since?: Date): Promise<boolean>;
 }

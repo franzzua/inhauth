@@ -1,15 +1,14 @@
-import {ResourceToken, URI} from "../contracts";
-import {IWithdrawStore} from "../contracts/withdraw-store";
+import {WithdrawStore} from "../contracts/withdraw-store";
 
-export class InMemoryWithdrawStore implements IWithdrawStore {
+export class InMemoryWithdrawStore implements WithdrawStore {
 
-    private Store: { resource: URI; date: Date; }[] = [];
+    private Store: { resource: string; date: Date; }[] = [];
 
-    public async CheckIfWithdrawed(resource: URI, since?: Date): Promise<boolean> {
+    public async CheckIfWithdrawed(resource: string, since?: Date): Promise<boolean> {
         return this.Store.some(x => x.resource == resource && (!since || x.date > since));
     }
 
-    public async WithdrawAllTokens(resource: URI): Promise<void> {
+    public async WithdrawAllTokens(resource: string): Promise<void> {
         this.Store.push({
             resource,
             date:  new Date()

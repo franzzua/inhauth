@@ -1,5 +1,5 @@
 import {InMemoryRuleStore} from "../../impl/in-memory-rule-store";
-import {AccessInheritanceRule, AccessMode, URI} from "../../contracts";
+import {AccessInheritanceRule} from "../../contracts";
 
 
 export class RuleStoreMock extends InMemoryRuleStore {

@@ -1,7 +1,7 @@
-import {AccessMode, InheritedAccess, ResourceToken, URI} from "./index";
+import {AccessMode, InheritedAccess, ResourceToken} from "./index";
 
 export interface IIssuer {
-    Issue(resource: URI, inheritedAccess: InheritedAccess): Promise<ResourceToken>;
+    Issue(resource: string, inheritedAccess: InheritedAccess): Promise<ResourceToken>;
 
-    Issue(resource: URI, accessMode: AccessMode): Promise<ResourceToken>;
+    Issue(resource: string, accessMode: AccessMode): Promise<ResourceToken>;
 }

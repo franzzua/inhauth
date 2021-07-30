@@ -1,11 +1,11 @@
 {
-  "name": "hia",
+  "name": "inhauth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "init": "lerna bootstrap --hoist",
-    "build": "tsc -b",
+    "build": "tsc -b --watch",
     "test": "jest"
   },
   "author": "",

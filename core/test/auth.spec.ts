@@ -4,14 +4,14 @@ import {RuleStoreMock} from "./mocks/rule-store.mock";
 import {Validator} from "../impl/validator";
 import {Issuer} from "../impl/issuer";
 import {InMemoryWithdrawStore} from "../impl/in-memory-withdraw-store";
-import {AccessInheritanceRule, AccessMode, URI} from "../contracts";
+import {AccessInheritanceRule, AccessMode} from "../contracts";
 
 
 export const resources = {
-    a: 'local://a' as URI,
-    b: 'local://b' as URI,
-    c: 'local://c' as URI,
-    d: 'local://d' as URI,
+    a: 'local://a',
+    b: 'local://b',
+    c: 'local://c',
+    d: 'local://d',
 }
 
 const rules: {
@@ -31,7 +31,7 @@ const rules: {
 }
 
 @suite
-export class AuthSpec{
+export class AuthSpec {
 
     private issuer = new Issuer();
     private withdrawer = new InMemoryWithdrawStore()
@@ -42,20 +42,20 @@ export class AuthSpec{
     );
 
     @test
-    async simpleAuth(){
+    async simpleAuth() {
         const aToken = await this.issuer.Issue(resources.a, AccessMode.read | AccessMode.write);
-        const bToken = await this.authenticator.Authenticate(resources.b, aToken);
+        const bToken = await this.authenticator.Authorize(resources.b, aToken);
         expect(bToken.AccessMode).toBe(AccessMode.read | AccessMode.write);
-        const cToken = await this.authenticator.Authenticate(resources.c, bToken);
+        const cToken = await this.authenticator.Authorize(resources.c, bToken);
         expect(cToken.AccessMode).toBe(AccessMode.read);
-        const dToken = await this.authenticator.Authenticate(resources.d, cToken);
+        const dToken = await this.authenticator.Authorize(resources.d, cToken);
         expect(dToken.AccessMode).toBe(AccessMode.read);
-        const cToken2 = await this.authenticator.Authenticate(resources.c, aToken);
+        const cToken2 = await this.authenticator.Authorize(resources.c, aToken);
         expect(cToken2.AccessMode).toBe(AccessMode.write);
-        const dToken2 = await this.authenticator.Authenticate(resources.d, cToken2);
+        const dToken2 = await this.authenticator.Authorize(resources.d, cToken2);
         expect(dToken2.AccessMode).toBe(AccessMode.none);
         this.withdrawer.WithdrawAllTokens(resources.b);
-        const cToken3 = await this.authenticator.Authenticate(resources.c, cToken);
+        const cToken3 = await this.authenticator.Authorize(resources.c, cToken);
         expect(cToken3).toBe(null);
     }
 }

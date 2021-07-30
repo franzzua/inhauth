@@ -1,16 +1,16 @@
-import {AccessInheritanceRule, IRuleStore, URI} from "../contracts";
+import {AccessInheritanceRule, RuleStore} from "../contracts";
 
-export class InMemoryRuleStore implements IRuleStore {
+export class InMemoryRuleStore implements RuleStore {
 
     protected rules: {
         [key: string]: AccessInheritanceRule[]
     } = {};
 
-    public async GetRules(resource: URI): Promise<AccessInheritanceRule[]> {
+    public async GetRules(resource: string): Promise<AccessInheritanceRule[]> {
         return this.rules[resource] ?? [];
     }
 
-    public async UpdateRules(resource: URI, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]): Promise<void> {
+    public async UpdateRules(resource: string, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]): Promise<void> {
         this.rules[resource] = [
             ...(this.rules[resource] ?? []),
             ...add

@@ -1,16 +1,16 @@
-import {AccessMode, IAuthenticator, IIssuer, IRuleStore, IValidator, ResourceToken, URI} from "../contracts";
+import {AccessMode, IAuthorizer, IIssuer, RuleStore, IValidator, ResourceToken} from "../contracts";
 
-export class Authenticator implements IAuthenticator {
+export class Authenticator implements IAuthorizer {
 
     constructor(
-        protected ruleStore: IRuleStore,
+        protected ruleStore: RuleStore,
         protected validator: IValidator,
         protected issuer: IIssuer,
     ) {
 
     }
 
-    public async Authenticate(resource: URI, token: ResourceToken): Promise<ResourceToken> {
+    public async Authorize(resource: string, token: ResourceToken): Promise<ResourceToken> {
         if (token.URI === resource){
             const isValid = await this.validator.Validate(token);
             return isValid ? token : null;

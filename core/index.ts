@@ -2,29 +2,28 @@ import {Issuer} from "./impl/issuer";
 import {InMemoryWithdrawStore} from "./impl/in-memory-withdraw-store";
 import {Authenticator} from "./impl/authenticator";
 import {Validator} from "./impl/validator";
-import {AccessInheritanceRule, IAuthenticator, IIssuer, IRuleStore, IWithdrawStore, URI} from "./contracts";
+import {AccessInheritanceRule, IAuthorizer, IIssuer, RuleStore, WithdrawStore, ResourceToken, AccessMode} from "./contracts/index";
 
-export * from "./contracts";
+export {AccessInheritanceRule, IAuthorizer, IIssuer, RuleStore, WithdrawStore, ResourceToken, AccessMode}
 export {Issuer} from "./impl/issuer"
 export {Authenticator} from "./impl/authenticator"
 export {Validator} from "./impl/validator"
 export {InMemoryRuleStore} from "./impl/in-memory-rule-store"
 export {InMemoryWithdrawStore} from "./impl/in-memory-withdraw-store"
+export class AuthManager {
 
-export class AuthManager{
-
-    constructor(private withdrawer: IWithdrawStore,
-                private ruleStore: IRuleStore) {
+    constructor(private withdrawer: WithdrawStore,
+                private ruleStore: RuleStore) {
     }
 
     public issuer: IIssuer = new Issuer();
-    public authenticator: IAuthenticator = new Authenticator(
+    public authorizer: IAuthorizer = new Authenticator(
         this.ruleStore,
         new Validator(this.withdrawer),
         this.issuer
     );
 
-    public async updateRules(resource: URI, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]){
+    public async updateRules(resource: string, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]) {
         await this.ruleStore.UpdateRules(resource, add, remove);
         if (remove.length > 0)
             this.withdrawer.WithdrawAllTokens(resource);

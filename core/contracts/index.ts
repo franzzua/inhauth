@@ -1,23 +1,21 @@
-export {IAuthenticator} from "./authenticator";
+export {IAuthorizer} from "./authorizer";
 export {IIssuer} from "./issuer";
-export {IWithdrawStore} from "./withdraw-store";
+export {WithdrawStore} from "./withdraw-store";
 export {IValidator} from "./validator";
-
-export type URI = string;
 /**
  * Describes rights that user have on some resource
  */
-export type ResourceToken = {
-    readonly URI: URI;
+export interface ResourceToken{
+    readonly URI: string;
     readonly AccessMode: AccessMode;
-    readonly ResourcePath: ReadonlyArray<URI>;
+    readonly ResourcePath: ReadonlyArray<string>;
     readonly Expires: Date;
     readonly IssueDate: Date;
 }
 
 export type AccessInheritanceRule = {
     readonly AccessMode: AccessMode;
-    readonly InheritedFrom: URI;
+    readonly InheritedFrom: string;
 }
 
 export type InheritedAccess = {
@@ -33,7 +31,7 @@ export enum AccessMode {
     control = 8
 }
 
-export interface IRuleStore {
-    GetRules(resource: URI): Promise<AccessInheritanceRule[]>;
-    UpdateRules(resource: URI, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]): Promise<void>;
+export abstract class RuleStore {
+    abstract GetRules(resource: string): Promise<AccessInheritanceRule[]>;
+    abstract UpdateRules(resource: string, add: AccessInheritanceRule[], remove: AccessInheritanceRule[]): Promise<void>;
 }

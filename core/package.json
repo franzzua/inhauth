@@ -1,7 +1,11 @@
 {
-  "name": "@hia/core",
+  "name": "@inhauth/core",
   "version": "1.0.0",
   "description": "",
+  "lsd:module": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "typings": "./dist/typings",
   "main": "./dist/index.js",
   "files": [
