@@ -1,0 +1,50 @@
+{
+  "name": "@inhauth/solid",
+  "version": "1.0.0",
+  "description": "",
+  "typings": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "lsd:module": "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid",
+  "lsd:components": "components/components.jsonld",
+  "lsd:contexts": {
+    "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid/^1.0.0/components/context.jsonld": "components/context.jsonld"
+  },
+  "lsd:importPaths": {
+    "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid/^1.0.0/components/": "components/",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid/^1.0.0/config/": "config/",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid/^1.0.0/dist/": "dist/"
+  },
+  "files": [
+    "dist",
+    "components",
+    "config"
+  ],
+  "scripts": {
+    "build:components": "componentsjs-generator   -i .componentsignore --typeScopedContexts",
+    "run": "community-solid-server -c config.json -f ./storage -m ."
+  },
+  "author": "Andrey Khamidulin",
+  "license": "ISC",
+  "peerDependencies": {
+    "@solid/community-server": "^1.0.0-beta.1"
+  },
+  "dependencies": {
+    "@inhauth/core": "1.0.0",
+    "n3": "^1.11.1",
+    "isomorphic-fetch": "^3.0.0",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@testdeck/jest": "^0.1.2",
+    "@types/jest": "^26.0.24",
+    "@types/n3": "^1.10.2",
+    "@solid/community-server": "^1.0.0-beta.1",
+    "componentsjs-generator": "^2.6.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.5"
+  }
+}
