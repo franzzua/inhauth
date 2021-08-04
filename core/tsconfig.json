@@ -2,8 +2,13 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./",
+    "composite": true,
     "declarationDir": "./dist",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "types": [
+      "jest",
+      "node"
+    ]
   },
   "exclude": [
     "dist",

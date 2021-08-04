@@ -1,0 +1,30 @@
+{
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid/^1.0.0/components/context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:inhauth-solid:default:WithdrawStore",
+      "@type": "LdpWithdrawStore",
+      "store": {
+        "@id": "urn:inhauth-solid:default:LdpStore"
+      }
+    },
+    {
+      "@id": "urn:inhauth-solid:default:RuleStore",
+      "@type": "LdpRuleStore",
+      "store": {
+        "@id": "urn:inhauth-solid:default:LdpStore"
+      }
+    },
+    {
+      "@id": "urn:inhauth-solid:default:LdpStore",
+      "@type": "LdpStore",
+      "resourceStore": {
+        "@id": "urn:solid-server:default:ResourceStore"
+      }
+    },
+    {
+      "@id": "urn:inhauth-solid:default:KeyStore",
+      "@type": "LdpKeyStore"
+    }
+  ]
+}

@@ -12,34 +12,44 @@ export class LdpStore {
     constructor(private readonly resourceStore: ResourceStore) {
     }
 
-    private getHiaURI(resource: URI) {
-        const uriWithoutHash = resource.substring(0, resource.indexOf('#'));
-        return uriWithoutHash + '.hia';
-    }
 
     private isLocal(resource: URI) {
-        return false;
+        return true;
     }
 
     private getRemote(resource: URI) {
-        return fetch(this.getHiaURI(resource));
+        const text = fetch(resource).then(x => x.json());
+        const triples = this.parser.parse(text);
+        return triples;
     }
 
-    private getLocal(resource: URI) {
-        const path = new URL(resource).pathname;
-        this.resourceStore.getRepresentation({ path }, {})
+
+    private async getLocal(resource: URI) {
+        const representation = await this.resourceStore.getRepresentation({
+            path: resource,
+        }, {
+            type: {['internal/quads']: 1},
+            encoding: {['utf8']: 1}
+        });
+        const result = await new Promise<Triple[]>(((resolve, reject) => {
+            const quads = [];
+            representation.data.on('data', (quad) => quads.push(quad));
+            representation.data.on('end', () => resolve(quads));
+            representation.data.on('error', reject);
+        }));
+        return result;
     }
+
 
     public async get(resource: URI): Promise<Triple[]> {
-        const content = this.isLocal(resource) ?
+        const triples = this.isLocal(resource) ?
             await this.getLocal(resource) :
             await this.getRemote(resource);
-        const triples = this.parser.parse(content);
         return triples;
     }
 
     public append(resource: URI, content) {
-        fetch(this.getHiaURI(resource), {
+        fetch(resource, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'SPARQL/UPDATE'

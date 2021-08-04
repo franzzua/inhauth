@@ -1,43 +1,24 @@
 {
   "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@inhauth/solid/^1.0.0/components/context.jsonld",
+  "import": [
+    "files-is:config/ldp.json"
+  ],
   "@graph": [
     {
       "@id": "urn:inhauth-solid:default:InheritedAuthorizer",
       "@type": "InheritedAuthorizer",
       "keyStore": {
-        "@id": "urn:inhauth-solid:default:WithdrawStore"
+        "@id": "urn:inhauth-solid:default:KeyStore"
       },
       "withdrawStore": {
         "@id": "urn:inhauth-solid:default:WithdrawStore"
       },
       "ruleStore": {
         "@id": "urn:inhauth-solid:default:RuleStore"
+      },
+      "loggerFactory": {
+        "@id": "urn:solid-server:default:LoggerFactory"
       }
-    },
-    {
-      "@id": "urn:inhauth-solid:default:WithdrawStore",
-      "@type": "LdpWithdrawStore",
-      "store": {
-        "@id": "urn:inhauth-solid:default:LdpStore"
-      }
-    },
-    {
-      "@id": "urn:inhauth-solid:default:RuleStore",
-      "@type": "LdpRuleStore",
-      "store": {
-        "@id": "urn:inhauth-solid:default:LdpStore"
-      }
-    },
-    {
-      "@id": "urn:inhauth-solid:default:LdpStore",
-      "@type": "LdpStore",
-      "resourceStore": {
-        "@id": "urn:solid-server:default:ResourceStore"
-      }
-    },
-    {
-      "@id": "urn:inhauth-solid:default:KeyStore",
-      "@type": "LdpKeyStore"
     }
   ]
 }

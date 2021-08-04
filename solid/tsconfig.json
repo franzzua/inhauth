@@ -2,11 +2,16 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./",
+    "composite": true,
     "declarationDir": "./dist",
     "outDir": "./dist",
     "esModuleInterop": true,
     "lib": [
       "ES2015", "DOM"
+    ],
+    "types": [
+      "jest",
+      "node"
     ]
   },
   "exclude": [

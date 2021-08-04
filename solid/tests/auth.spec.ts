@@ -41,7 +41,8 @@ export class AuthSpec{
     private auth = new InheritedAuthorizer(
         new KeyStoreMock(),
         new InMemoryWithdrawStore() as any,
-        new RuleStoreMock(rules) as any
+        new RuleStoreMock(rules) as any,
+        {createLogger(){return console as any; }}
     );
 
     @test

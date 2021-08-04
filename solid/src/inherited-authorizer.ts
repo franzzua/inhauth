@@ -1,5 +1,5 @@
 import {AccessMode, AuthManager, RuleStore, WithdrawStore, ResourceToken, URI} from "@inhauth/core";
-import {Authorization, Authorizer, AuthorizerArgs, RepresentationMetadata,} from "@solid/community-server";
+import {Authorization, Authorizer, AuthorizerArgs, RepresentationMetadata, LoggerFactory, Logger} from "@solid/community-server";
 import {IncomingMessage, ServerResponse} from "http";
 import {KeyStore} from "./key-store";
 import {decode, sign, verify,} from "jsonwebtoken";
@@ -8,15 +8,20 @@ import {LdpRuleStore} from "./ldp/ldp-rule-store";
 import {LdpWithdrawStore} from "./ldp/ldp-withdraw-store";
 
 export class InheritedAuthorizer implements Authorizer {
+    private logger: Logger;
 
     constructor(private readonly keyStore: KeyStore,
                 private readonly withdrawStore: LdpWithdrawStore,
-                private readonly ruleStore: LdpRuleStore) {
+                private readonly ruleStore: LdpRuleStore,
+                loggerFactory: LoggerFactory) {
+        this.logger = loggerFactory.createLogger('InheritedAuthorizer');
+        this.logger.info('InheritedAuthorizer:constructor')
     }
 
     async canHandle(input: AuthorizerArgs): Promise<void> {
         if ((input.credentials as InhCredentials).resourceToken != null)
             return;
+        this.logger.info("InheritedAuthorizer token not found");
         throw new Error("InheritedAuthorizer does not support anything(.");
     }
 

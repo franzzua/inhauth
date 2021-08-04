@@ -2,6 +2,8 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "./dist/typings",
+    "composite": true,
+    "esModuleInterop": true,
     "outDir": "./dist",
     "module": "commonjs",
     "target": "es6",
@@ -9,7 +11,8 @@
     "experimentalDecorators": true,
     "lib": [
       "ES6",
-      "ES2015"
+      "ES2015",
+      "DOM"
     ],
     "types": [
       "jest",
@@ -21,13 +24,13 @@
       "path": "./core"
     },
     {
-      "path": "./web"
+      "path": "./solid"
     }
   ],
   "exclude": [
     "core",
     "dist",
-    "web",
+    "solid",
     "node_modules"
   ]
 }

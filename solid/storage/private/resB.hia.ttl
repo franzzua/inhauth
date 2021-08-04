@@ -1,0 +1,8 @@
+@prefix acl: <http://www.w3.org/ns/auth/acl#>.
+@prefix inhauth: <http://www.w3.org/ns/inhauth#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+<#access>
+    a               inhauth:Rule;
+    acl:mode        acl:Read;
+    <https://hia.org/inheritedFrom>    <../resA.ttl>.

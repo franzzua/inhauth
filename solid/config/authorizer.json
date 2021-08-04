@@ -20,8 +20,8 @@
           "resourceAuthorizer": { "@id": "urn:solid-server:default:WebAclAuthorizer" },
           "auxiliaryStrategy": { "@id": "urn:solid-server:default:AuxiliaryStrategy" }
         },
-        { "@id": "urn:solid-server:default:WebAclAuthorizer" },
-        { "@id": "urn:inhauth-solid:default:InheritedAuthorizer" }
+        { "@id": "urn:inhauth-solid:default:InheritedAuthorizer" },
+        { "@id": "urn:solid-server:default:WebAclAuthorizer" }
       ]
     }
   ]
