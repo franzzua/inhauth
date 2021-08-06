@@ -28,9 +28,10 @@
     }
   ],
   "exclude": [
-    "core",
+    "inhauth-core",
+    "inhauth-solid",
     "dist",
-    "solid",
+    "meld",
     "node_modules"
   ]
 }

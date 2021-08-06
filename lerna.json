@@ -1,8 +1,8 @@
 {
   "packages": [
-    "core",
-    "web",
-    "solid-server"
+    "inhauth-core",
+    "meld",
+    "inhauth-solid"
   ],
   "version": "0.0.0"
 }
